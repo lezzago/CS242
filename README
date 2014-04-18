@@ -1,0 +1,11 @@
+This is the source code to send an email in the future.
+
+Current Features:
+- User account system with bcyrpt security
+- Email Verification
+- Send a custom email
+
+To Be Implemented:
+- Send an email at a given time
+- Change the password of the user
+- Create an usable interface with CSS

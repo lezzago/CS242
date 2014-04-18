@@ -1,0 +1,4 @@
+$ cat .gitignore
+ManualTestPlan.docx
+ManualTestPlan.pdf
+config.php

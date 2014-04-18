@@ -1,0 +1,15 @@
+<html>
+	<head>
+		<title>Verification for FutureSend!</title>
+	</head>
+
+	<body>
+		<h1>{{message}}</h1>
+		{% if "You have successfully verified" in message %}
+			<a href="./login.php">Login here.</a>
+		{% else %}
+			<a href="./login.php">Login here</a> or <a href="./signup.php">Signup here</a>
+		{% endif %}
+	</body>
+
+</html>

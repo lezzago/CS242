@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Signup for FutureSend!</title>
+	</head>
+
+	<body>
+		<h1>Signup for FutureSend!</h1>
+		<form action="./signup.php" method="post">
+			
+			Username:<input type="text" name="username" value="{{username}}">
+			<br>
+			Password:<input type="password" name="pass" value="">
+			<br>
+			Confirm Password:<input type="password" name="pass_confirmation" value="">
+			<br>
+			Email:<input type="text" name="email" value="{{email}}">
+			<br>
+			<input type="submit">
+		</form>
+		{% for error in errors %}
+			<font color = "red">
+				{{error}}<br>
+			</font>
+		{% endfor %}
+		Already have an account? <a href="./login.php">Login here.</a>
+	</body>
+
+</html>

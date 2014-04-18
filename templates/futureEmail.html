@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Send an Email to the Future!</title>
+	</head>
+
+	<body>
+		<h1>Send an Email to the Future!</h1>
+		<a href="./welcome.php">HOMEPAGE</a>
+		<p> Hello. Currently you are able to send and email to yourself {{username}}. 
+		<form action="./futureEmail.php" method="post">
+			
+			Subject:<input type="text" name="subject" value="">
+			<br>
+			Body:<textarea name="message" value=""></textarea>
+			<br>
+			<input type="submit">
+		</form>
+		{{message}}
+	</body>
+
+</html>

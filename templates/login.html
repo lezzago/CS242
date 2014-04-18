@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Login to FutureSend!</title>
+	</head>
+
+	<body>
+		<h1>Login to FutureSend!</h1>
+		<form action="./login.php" method="post">
+			
+			Username:<input type="text" name="username" value="{{username}}">
+			<br>
+			Password:<input type="password" name="pass" value="">
+			<br>
+			<input type="submit" value="Login">
+		</form>
+		{% for error in errors %}
+			<font color="red">
+				{{error}}<br>
+			</font>
+		{% endfor %}
+		Do not have an account? <a href="./signup.php">Signup here.</a>
+	</body>
+
+</html>
