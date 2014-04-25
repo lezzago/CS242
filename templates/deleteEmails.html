@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Delete Emails you have created!</title>
+	</head>
+
+	<body>
+		<h1>Delete Emails you have created!</h1>
+		<a href="./welcome.php">HOMEPAGE</a>
+		<p> Hello. Currently you are able to delete emails that you have made before they are sent. 
+		
+		{% if messages is not empty %}
+		<form action="" method="post">
+			<input type='text' name='count' value='{{message_size}}' style='display:none;'></input>
+			{% for i in 0..message_size-1 %}
+				<input type='checkbox' name='{{i}}' value="{{messages[i]['email_id']}}"></input>
+				<b>Email {{i+1}}:</b>
+				<br>
+				Subject: {{messages[i]['subject']}}
+				<br>
+				Message: {{messages[i]['message']}}
+				<br>
+				Time: {{messages[i]['time']}}
+				<br><br>
+			{% endfor %}
+			<input type="submit"></input>
+		</form>
+		{% else %}
+			<br>
+			Have not created any emails? Create some <a href="./futureEmail.php">here</a>
+		{% endif %}
+		{{message}}
+	</body>
+
+</html>
