@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Edit Profile</title>
+	</head>
+	<body>
+		<table id="main-content">
+			<tr vertical-align="center">
+				<td id="main-cell">
+					<h1>Edit profile</h1>
+					<br>
+					<a href="./welcome.php">HOME</a>
+					<br>
+					<div>User: {{ user }}</div>
+					<div>Email: {{ email }}</div>
+					<br>
+					<form method="post">
+						<label class="input-label">New username:</label>
+						<input type="text" name="newuser" value="{{ newuser }}">
+						<br>
+						
+						<label class="input-label">Old password:</label>
+						<input type="password" name="oldpass">
+						<br>
+						
+						<label class="input-label">New password:</label>
+						<input type="password" name="newpass">
+						<br>
+						
+						<label class="input-label">Confirm password:</label>
+						<input type="password" name="newpassconfirm">
+						<br>
+						
+						<input type="submit" value="Save">
+						
+					</form>
+					{% for message in messages %}
+						{{message}}
+						<br>
+					{% endfor %}
+				</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

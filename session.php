@@ -108,19 +108,21 @@
 	/**
 	* This adds an email to the database to which it will send an email at the given time
 	*
+	* @param $user  	string This is the user who wants to send the email
 	* @param $email 	string This is the email address that we are sending an email to
 	* @param $subject 	string This is the email subject of the user we are adding
 	* @param $message 	string This is the email message of the user we are adding
 	* @param $time  	string This is the time the email will be sent
 	*/
-	function add_email($email, $subject, $message, $time)
+	function add_email($user, $email, $subject, $message, $time)
 	{
 		$con = connect();
+		$user = mysqli_real_escape_string($con, $user);
 		$subject = mysqli_real_escape_string($con, $subject);
 		$email = mysqli_real_escape_string($con, $email);
 		$message = mysqli_real_escape_string($con, $message);
 		$time = mysqli_real_escape_string($con, $time);
-		$insert_message = "INSERT INTO future_emails (email, subject, message, time) VALUES ('$email', '$subject', '$message', '$time')";
+		$insert_message = "INSERT INTO future_emails (user_name, email, subject, message, time) VALUES ('$user', '$email', '$subject', '$message', '$time')";
 		mysqli_query($con, $insert_message);
 		mysqli_close($con);
 	}
@@ -158,6 +160,39 @@
 		$result = mysqli_query($con, $insert_user);
 		mysqli_close($con);
 		send_conf($user, $email, $hash);
+	}
+	
+	/**
+	* This changes the user's password
+	*
+	* @param $user 	string This is the name of the user we are changing
+	* @param $pass 	string This is the password of the user we are adding
+	*/
+	function change_pass($user, $pass)
+	{
+		$con = connect();
+		$user = mysqli_real_escape_string($con, $user);
+		$pass = mysqli_real_escape_string($con, $pass);
+		$pass = password_hash($pass, PASSWORD_BCRYPT, $GLOBALS['configs']['options']);
+		$update_pass = "UPDATE user_accounts SET user_accounts.password = '$pass' WHERE user_accounts.user_name ='$user'";
+		$result = mysqli_query($con, $update_pass);
+		mysqli_close($con);
+	}
+	
+	/**
+	* This changes the user's username
+	*
+	* @param $old_user 	string This is the name of the user we are changing
+	* @param $new_user 	string This is the new username we want
+	*/
+	function change_user($old_user, $new_user)
+	{
+		$con = connect();
+		$old_user= mysqli_real_escape_string($con, $old_user);
+		$new_user= mysqli_real_escape_string($con, $new_user);
+		$update_user = "UPDATE user_accounts SET user_accounts.user_name = '$new_user' WHERE user_accounts.user_name ='$old_user'";
+		$result = mysqli_query($con, $update_user);
+		mysqli_close($con);
 	}
 	
 	/**
