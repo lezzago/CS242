@@ -1,20 +1,54 @@
 <html>
 	<head>
 		<title>Send an Email to the Future!</title>
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script type = "text/javascript" src= "static/thirdparty.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	</head>
 
 	<body>
 		<h1>Send an Email to the Future!</h1>
 		<a href="./welcome.php">HOMEPAGE</a>
 		<p> Hello. Currently you are able to send and email to yourself {{username}}. 
-		<form action="./futureEmail.php" method="post">
+		<form action="" method="post">
 			
-			Subject:<input type="text" name="subject" value="">
+			<b>Subject:</b><input type="text" name="subject" value=""></input>
 			<br>
-			Body:<textarea name="message" value=""></textarea>
+			<b>Body:</b><textarea name="message" value=""></textarea>
+			<br>
+			<b>Deliver on:</b>
+			<br>
+			Date: <input type="text" name="date" id="datepicker"></input>
+			Time: <select name="hour">
+				<option value=""></option>
+				{% for i in 1..12 %}
+					{% if i < 10 %}
+						<option value="0{{i}}">0{{i}}</option>
+					{% else %}
+						<option value="{{i}}">{{i}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+			<select name="minute">
+				<option value=""></option>
+				{% for i in 0..59 %}
+					{% if i < 10 %}
+						<option value="0{{i}}">0{{i}}</option>
+					{% else %}
+						<option value="{{i}}">{{i}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+			<select name="ampm">
+				<option value=""></option>
+				<option value="am">am</option>
+				<option value="pm">pm</option>
+			</select>
 			<br>
 			<input type="submit">
 		</form>
+		
 		{{message}}
 	</body>
 

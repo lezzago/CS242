@@ -1,15 +1,14 @@
 <?php
-
 	require 'sendEmail.php';
 	
 	$configs = include('config.php');
 
 
 	/**
-     * This connects use to the server and then to the required database
-     *
-     * @return       It returns the connection to the server.
-     */
+	* This connects use to the server and then to the required database
+	*
+	* @return       It returns the connection to the server.
+	*/
 	function connect()
 	{
 		$con = mysqli_connect($GLOBALS['configs']['host'], $GLOBALS['configs']['user'], $GLOBALS['configs']['pass']);
@@ -19,13 +18,13 @@
 		mysqli_select_db($con, $GLOBALS['configs']['database']);
 		return $con;
 	}
-
+	
 	/**
-     * This tells us if the given username is a user in the database
-     *
-     * @param $user 	string This is the name of the username we are checking for
-     * @return int      It returns 1 if the user exists and 0 if they don't.
-     */
+	* This tells us if the given username is a user in the database
+	*
+	* @param $user 	string This is the name of the username we are checking for
+	* @return int      It returns 1 if the user exists and 0 if they don't.
+	*/
 	function check_user($user)
 	{
 		$con = connect();
@@ -38,11 +37,11 @@
 	}
 	
 	/**
-     * This tells us if the given email is already associated to an user account
-     *
-     * @param $email 	string This is the name of the email we are checking for
-     * @return String      It returns the email if it exists or then it is NULL.
-     */
+	* This tells us if the given email is already associated to an user account
+	*
+	* @param $email 	string This is the name of the email we are checking for
+	* @return String      It returns the email if it exists or then it is NULL.
+	*/
 	function check_email($email)
 	{
 		$con = connect();
@@ -60,11 +59,11 @@
 	}
 	
 	/**
-     * This gives us the email for the given user
-     *
-     * @param $user 	string This is user for whom we want the email
-     * @return String      It returns the email of the given user.
-     */
+	* This gives us the email for the given user
+	*
+	* @param $user 	string This is user for whom we want the email
+	* @return String      It returns the email of the given user.
+	*/
 	function get_email($user)
 	{
 		$con = connect();
@@ -81,12 +80,12 @@
 		mysqli_close($con);
 		return $email;
 	}
-
+	
 	/**
-     * This adds a user to the database with the given information
-     *
-     * @param $user 	string This is the name of the user we are adding
-     */
+	* This adds a user to the database with the given information
+	*
+	* @param $user 	string This is the name of the user we are adding
+	*/
 	function add_user($user)
 	{
 		$con = connect();
@@ -102,17 +101,51 @@
 		$email = $account['email'];
 		$pass = $account['password'];
 		$insert_user = "INSERT INTO user_accounts (user_name, password, email) VALUES ('$user', '$pass', '$email')";
-		$result = mysqli_query($con, $insert_user);
+		mysqli_query($con, $insert_user);
 		mysqli_close($con);
 	}
 
 	/**
-     * This adds a verification to the database, so the user can confirm the email
-     *
-     * @param $user 	string This is the name of the user we are adding
-     * @param $pass 	string This is the password of the user we are adding
-     * @param $email 	string This is the email of the user we are adding
-     */
+	* This adds an email to the database to which it will send an email at the given time
+	*
+	* @param $email 	string This is the email address that we are sending an email to
+	* @param $subject 	string This is the email subject of the user we are adding
+	* @param $message 	string This is the email message of the user we are adding
+	* @param $time  	string This is the time the email will be sent
+	*/
+	function add_email($email, $subject, $message, $time)
+	{
+		$con = connect();
+		$subject = mysqli_real_escape_string($con, $subject);
+		$email = mysqli_real_escape_string($con, $email);
+		$message = mysqli_real_escape_string($con, $message);
+		$time = mysqli_real_escape_string($con, $time);
+		$insert_message = "INSERT INTO future_emails (email, subject, message, time) VALUES ('$email', '$subject', '$message', '$time')";
+		mysqli_query($con, $insert_message);
+		mysqli_close($con);
+	}
+	
+	/**
+	* This deletes an email to the database to which it will send an email at the given time
+	*
+	* @param $email_id 	string This is the id of the email we are deleting
+	*/
+	function remove_email($email_id)
+	{
+		$con = connect();
+		$email_id = mysqli_real_escape_string($con, $email_id);
+		$remove_message = "DELETE FROM future_emails  WHERE future_emails.email_id = '$email_id'";
+		mysqli_query($con, $remove_message);
+		mysqli_close($con);
+	}
+	
+	/**
+	* This adds a verification to the database, so the user can confirm the email
+	*
+	* @param $user 	string This is the name of the user we are adding
+	* @param $pass 	string This is the password of the user we are adding
+	* @param $email 	string This is the email of the user we are adding
+	*/
 	function add_verify($user, $pass, $email)
 	{
 		$con = connect();
@@ -128,11 +161,11 @@
 	}
 	
 	/**
-     * This deletes the verification entry we had because the user has been verified
-     *
-     * @param $user 	string This is the name of the user we are removing
-     * @param $hash 	string This is the hash of the user we are removing
-     */
+	* This deletes the verification entry we had because the user has been verified
+	*
+	* @param $user 	string This is the name of the user we are removing
+	* @param $hash 	string This is the hash of the user we are removing
+	*/
 	function delete_verify($user, $hash)
 	{
 		$con = connect();
@@ -142,14 +175,14 @@
 		$result = mysqli_query($con, $delete_user);
 		mysqli_close($con);
 	}
-
+	
 	/**
-     * This tells us if the given username and password match one account in the database
-     *
-     * @param $user 	string This is the name of the username we are checking for
-     * @param $pass 	string This is the password we are checking for
-     * @return int      It returns 1 if the account exists and 0 if they don't.
-     */
+	* This tells us if the given username and password match one account in the database
+	*
+	* @param $user 	string This is the name of the username we are checking for
+	* @param $pass 	string This is the password we are checking for
+	* @return int      It returns 1 if the account exists and 0 if they don't.
+	*/
 	function valid_cred($user, $pass)
 	{
 		$con = connect();
@@ -170,15 +203,15 @@
 		mysqli_close($con);
 		return $login;
 	}
-
+	
 	/**
-     * This tells us if the given username and password match one account in the database
-     *
-     * @param $user 	string This is the name of the username we are checking for
-     * @param $email 	string This is the email of the username we are checking for
-     * @param $hash 	string This is the hash of the username we are checking for
-     * @return Array      It returns the entry that has the given values.
-     */
+	* This tells us if the given username and password match one account in the database
+	*
+	* @param $user 	string This is the name of the username we are checking for
+	* @param $email 	string This is the email of the username we are checking for
+	* @param $hash 	string This is the hash of the username we are checking for
+	* @return Array      It returns the entry that has the given values.
+	*/
 	function check_conf($user, $email, $hash)
 	{
 		$con = connect();
@@ -196,5 +229,4 @@
 		mysqli_close($con);
 		return $account;
 	}
-
 ?>

@@ -16,10 +16,17 @@
 		$user = $_SESSION['username'];
 		$subject = $_POST['subject'];
 		$email_message = $_POST['message'];
-		if(isset($subject, $email_message))
+		$time = date('m-d-Y h:i a');
+		$date = str_replace('/', '-',$_POST['date']);
+		$datetime = $date.' '.$_POST['hour'].':'.$_POST['minute'].' '.$_POST['ampm'];
+		$hour = $_POST['hour'];
+		$message = 'Please enter the proper stuff';
+		if(!empty($date) && !empty($_POST['hour']) && !empty($_POST['minute']) && !empty($_POST['ampm']) && $time > $datetime)
+			$message = 'Sorry you cannot send an email to the past.';
+		elseif(isset($subject) && !empty($subject) && isset($email_message) && !empty($email_message))
 		{
 			$email = get_email($user);
-			send_mail($email, $subject, $email_message);
+			add_email($email, $subject, $email_message, $datetime);
 			$message = 'Email has been sent. Soon in the future, choosing a time to send the email will be implemented.';
 		}
 			
