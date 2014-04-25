@@ -1,7 +1,10 @@
 <?php
+	/*
+	* This is run by cron job every minute to see if there needs to be an email added
+	*/
 	require 'session.php';
 	
-	$time = date('m-d-Y h:i a');
+	$time = date('m-d-Y H:i');
 	$con = connect();
 	$get_message = "SELECT * FROM future_emails WHERE future_emails.time <= '$time'";
 	if ($result = mysqli_query($con, $get_message)) 

@@ -16,7 +16,7 @@
 		$user = $_SESSION['username'];
 		$subject = $_POST['subject'];
 		$email_message = $_POST['message'];
-		$time = date('m-d-Y h:i a');
+		$time = date('m-d-Y H:i');
 		$date = str_replace('/', '-',$_POST['date']);
 		if($_POST['ampm'] == 'pm')
 			$datetime = $date.' '.($_POST['hour']+12).':'.$_POST['minute'];
