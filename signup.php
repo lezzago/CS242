@@ -45,6 +45,7 @@
 			
 		echo $twig->render('signup.html', array('errors' => $errors,
 							'username' => $user,
-							'email' => $email));
+							'email' => $email,
+							'logged_in' => false));
 	}
 ?>

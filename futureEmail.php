@@ -13,6 +13,7 @@
 		header('Location: login.php');
 	else
 	{
+		$logged_in = true;
 		$user = $_SESSION['username'];
 		$subject = $_POST['subject'];
 		$email_message = $_POST['message'];
@@ -34,7 +35,8 @@
 		}
 			
 		echo $twig->render('futureEmail.html', array('message' => $message,
-							'username' => $user));
+							'username' => $user,
+							'logged_in' => $logged_in));
 	}
 		
 

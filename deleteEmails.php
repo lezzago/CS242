@@ -14,11 +14,9 @@
 	{
 		$user = $_SESSION['username'];
 		$con = connect();
-		$count = $_POST['count'];
-		for($i = 0; $i < $count; $i++)
+		if(isset($_POST['deleted_book']) && !empty($_POST['deleted_book']))
 		{
-			if(!empty($_POST["$i"]))
-				remove_email($_POST["$i"]);
+			remove_email($_POST['deleted_book']);
 		}
 		$get_message = "SELECT * FROM future_emails WHERE future_emails.user_name <= '$user'";
 		if ($result = mysqli_query($con, $get_message)) 
@@ -35,6 +33,8 @@
 		$size = count($messages);
 		
 		echo $twig->render('deleteEmails.html', array('messages' => $messages,
-								'message_size' => $size));
+								'message_size' => $size,
+								'username' => $user,
+								'logged_in' => true));
 	}
 ?>

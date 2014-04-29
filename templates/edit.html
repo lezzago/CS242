@@ -1,45 +1,51 @@
 <html>
 	<head>
 		<title>Edit Profile</title>
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
 	</head>
 	<body>
-		<table id="main-content">
-			<tr vertical-align="center">
-				<td id="main-cell">
-					<h1>Edit profile</h1>
+	
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+			<div class="container">
+				<h1>Edit profile</h1>
+				<br>
+				<a href="./welcome.php">HOME</a>
+				<br>
+				<div>User: {{ username }}</div>
+				<div>Email: {{ email }}</div>
+				<br>
+				<form method="post">
+					<label class="input-label">New username:</label>
+					<input type="text" name="newuser" value="{{ newuser }}">
 					<br>
-					<a href="./welcome.php">HOME</a>
+					
+					<label class="input-label">Old password:</label>
+					<input type="password" name="oldpass">
 					<br>
-					<div>User: {{ user }}</div>
-					<div>Email: {{ email }}</div>
+					
+					<label class="input-label">New password:</label>
+					<input type="password" name="newpass">
 					<br>
-					<form method="post">
-						<label class="input-label">New username:</label>
-						<input type="text" name="newuser" value="{{ newuser }}">
-						<br>
-						
-						<label class="input-label">Old password:</label>
-						<input type="password" name="oldpass">
-						<br>
-						
-						<label class="input-label">New password:</label>
-						<input type="password" name="newpass">
-						<br>
-						
-						<label class="input-label">Confirm password:</label>
-						<input type="password" name="newpassconfirm">
-						<br>
-						
-						<input type="submit" value="Save">
-						
-					</form>
-					{% for message in messages %}
-						{{message}}
-						<br>
-					{% endfor %}
-				</td>
-			</tr>
-		</table>
+					
+					<label class="input-label">Confirm password:</label>
+					<input type="password" name="newpassconfirm">
+					<br>
+					
+					<input type="submit" value="Save">
+					
+				</form>
+				{% for message in messages %}
+					{{message}}
+					<br>
+				{% endfor %}
+			</div>
+		</div>
 	</body>
 
 </html>

@@ -1,34 +1,55 @@
 <html>
 	<head>
 		<title>Delete Emails you have created!</title>
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
 	</head>
 
 	<body>
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+		<div class="container">
 		<h1>Delete Emails you have created!</h1>
 		<a href="./welcome.php">HOMEPAGE</a>
 		<p> Hello. Currently you are able to delete emails that you have made before they are sent. 
 		
 		{% if messages is not empty %}
-		<form action="" method="post">
-			<input type='text' name='count' value='{{message_size}}' style='display:none;'></input>
-			{% for i in 0..message_size-1 %}
-				<input type='checkbox' name='{{i}}' value="{{messages[i]['email_id']}}"></input>
-				<b>Email {{i+1}}:</b>
-				<br>
-				Subject: {{messages[i]['subject']}}
-				<br>
-				Message: {{messages[i]['message']}}
-				<br>
-				Time: {{messages[i]['time']}}
-				<br><br>
-			{% endfor %}
-			<input type="submit"></input>
-		</form>
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Subject</th>
+					<th>Message</th>
+					<th>Time</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in 0..message_size-1 %}
+				<tr>
+					<form action="" method="post">
+					<input type='test' name="deleted_book" value="{{messages[i]['email_id']}}" style="display:none"></input>
+					<td>{{i+1}}</td>
+					<td>{{messages[i]['subject']}}</td>
+					<td>{{messages[i]['message']}}</td>
+					<td>{{messages[i]['time']}}</td>
+					<td><input type="submit" class="btn btn-default" value="Delete"></input></td>
+					</form>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 		{% else %}
 			<br>
 			Have not created any emails? Create some <a href="./futureEmail.php">here</a>
 		{% endif %}
 		{{message}}
+		</div>
+		</div>
 	</body>
 
 </html>

@@ -63,9 +63,10 @@
 		}
 		
 		echo $twig->render('edit.html', array(
-			'user' => $user,
+			'username' => $user,
 			'email' => $email,
-			'messages' => $messages));
+			'messages' => $messages,
+			'logged_in' => true));
 		
 	}
 ?>

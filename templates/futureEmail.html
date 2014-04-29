@@ -5,9 +5,18 @@
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script type = "text/javascript" src= "static/thirdparty.js"></script>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
+		
 	</head>
 
 	<body>
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+		<div class="container">
 		<h1>Send an Email to the Future!</h1>
 		<a href="./welcome.php">HOMEPAGE</a>
 		<br>
@@ -51,8 +60,12 @@
 			<br>
 			<input type="submit">
 		</form>
-		
 		{{message}}
+		{% for i in 0..59 %}
+		<br>
+		{% endfor %}
+		</div>
+		</div>
 	</body>
 
 </html>

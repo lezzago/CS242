@@ -1,9 +1,18 @@
 <html>
 	<head>
 		<title>Welcome to FutureSend!</title>
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
 	</head>
 
 	<body>
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+		<div class="container">
 		<h1>Welcome to FutureSend {{username}}!</h1>
 		Your email is {{email}}
 		<br>
@@ -14,6 +23,8 @@
 		<a href="./edit.php">Edit Profile.</a>
 		<br>
 		<a href="./logout.php">Logout.</a>
+		</div>
+		</div>
 	</body>
 
 </html>

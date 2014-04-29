@@ -1,9 +1,17 @@
 <html>
 	<head>
 		<title>Signup for FutureSend!</title>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
 	</head>
 
 	<body>
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+		<div class="container">
 		<h1>Signup for FutureSend!</h1>
 		<form action="./signup.php" method="post">
 			
@@ -23,6 +31,8 @@
 			</font>
 		{% endfor %}
 		Already have an account? <a href="./login.php">Login here.</a>
+		</div>
+		</div>
 	</body>
 
 </html>
