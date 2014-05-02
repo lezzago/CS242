@@ -1,0 +1,15 @@
+#delete-box
+{
+	margin: auto;
+	background-color: rgba(246, 246, 246, 0.7);
+	border-radius: 10px;
+	padding: 20px 20px 30px 20px;
+	width: 800px;
+	
+}
+
+tbody
+{
+	background-color: rgba(225, 232, 232, 1);
+
+}
