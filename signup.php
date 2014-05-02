@@ -1,8 +1,4 @@
 <?php
-/**
- * This registers the users to an account. If they submit wrong information, it will tell
- * the user what they have done wrong. Also it will send you an email to confirm.
- */
 
 	require_once './vendor/autoload.php';
 	require 'session.php';
@@ -48,4 +44,8 @@
 							'email' => $email,
 							'logged_in' => false));
 	}
+		
+
+	
+
 ?>

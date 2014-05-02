@@ -32,9 +32,12 @@
 			if (!empty($new_user) && !check_user($new_user)) 
 				$change_user = true;
 			
+			elseif (check_user($new_user))
+					$invalid_user = 'This username has already been taken.';
+			
 			if (empty($old_pass) || !valid_cred($user, $old_pass))
 			{
-				$messages[] = 'The password you entered was incorrect.';
+				$invalid_pass = 'The password you entered was incorrect.';
 				$valid = false;
 			}
 				
@@ -42,7 +45,7 @@
 				$change_pass = true;
 			
 			else
-				$messages[] = 'Your passwords didn\'t match.';
+				$invalid_confirm = 'Your passwords didn\'t match.';
 		
 			
 			if ($valid && ($change_user || $change_pass))
@@ -51,13 +54,13 @@
 				{
 					$messages = '';
 					change_user($user, $new_user);
-					$messages[] = 'Successfully changed the user to '.$new_user;
+					$messages[] = 'Successfully changed the user to '.$new_user.'.';
 				}
 				
 				if($change_pass)
 				{
 					change_pass($user, $new_pass);
-					$messages[] = 'Successfully changed the password';
+					$messages[] = 'Successfully changed the password.';
 				}
 			}
 		}
@@ -66,7 +69,10 @@
 			'username' => $user,
 			'email' => $email,
 			'messages' => $messages,
-			'logged_in' => true));
+			'logged_in' => true,
+			'invalid_user' => $invalid_user,
+			'invalid_pass' => $invalid_pass,
+			'invalid_confirm' => $invalid_confirm));
 		
 	}
 ?>

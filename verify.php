@@ -1,8 +1,4 @@
 <?php
-/**
- * This verifes the user to make sure that they would like to create an account.
- * To properly verify, you need to get the link from the email you were sent.
- */
 
 	require_once './vendor/autoload.php';
 	require 'session.php';

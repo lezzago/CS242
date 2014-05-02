@@ -1,0 +1,51 @@
+.pad
+{
+	padding-top: 70px;
+	
+}
+
+#box
+{
+	margin: auto;
+	background-color: rgba(246, 246, 246, 0.7);
+	border-radius: 10px;
+	padding: 20px 20px 30px 20px;
+	width: 600px;
+	
+}
+
+#delete-box
+{
+	margin: auto;
+	background-color: rgba(246, 246, 246, 0.7);
+	border-radius: 10px;
+	padding: 20px 20px 30px 20px;
+	width: 800px;
+	
+}
+
+body
+{
+	background-image:url("./images/letters.jpg"); 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.date
+{
+	margin-right: -6.7px;
+	width:21%;
+}
+.time
+{
+	margin-right: -8.2px;
+	margin-left: -4px;
+	width: 16%
+}
+tbody
+{
+	background-color: rgba(225, 232, 232, 1);
+
+}

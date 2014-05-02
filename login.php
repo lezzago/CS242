@@ -1,8 +1,4 @@
 <?php
-/**
- * This logs in the users to their account. If they submit wrong information, it will tell
- * the user what they have done wrong.
- */
 
 	require_once './vendor/autoload.php';
 	require 'session.php';
@@ -35,5 +31,8 @@
 		echo $twig->render('login.html', array('errors' => $errors,
 						'username' => $user));
 	}
+		
+
+	
 
 ?>

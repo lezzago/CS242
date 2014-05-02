@@ -5,9 +5,10 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./static/header.css">
+		<link rel="stylesheet" type="text/css" href="./static/homepage.css">
 	</head>
 
-	<body>
+	<body id="home">
 		{% import "macros/header.html" as header %}
 		{{ header.nav(logged_in, username) }}
 		<div class="pad">

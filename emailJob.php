@@ -1,7 +1,4 @@
 <?php
-	/*
-	* This is run by cron job every minute to see if there needs to be an email added
-	*/
 	require 'session.php';
 	
 	$time = date('m-d-Y H:i');
@@ -18,10 +15,13 @@
 		
 	}
 	mysqli_close($con);
-	foreach($messages as $message)
+	if(!empty($messages))
 	{
-		imap_mail($message['email'], $message['subject'], $message['message']);
-		remove_email($message['email_id']);
+		foreach($messages as $message)
+		{
+			imap_mail($message['email'], $message['subject'], $message['message']);
+			remove_email($message['email_id']);
+		}
 	}
 
 ?>

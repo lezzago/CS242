@@ -1,7 +1,4 @@
 <?php
-/**
- * This send an email to the user from what they have filled in for the fields.
- */
 
 	require_once './vendor/autoload.php';
 	require 'session.php';
@@ -24,7 +21,9 @@
 		else
 			$datetime = $date.' '.$_POST['hour'].':'.$_POST['minute'];
 		$hour = $_POST['hour'];
-		$message = 'Please enter the proper stuff';
+		if(isset($subject) && isset($date) && isset($email_message))
+			$message = 'You are missing information';
+		$error = true;
 		if(!empty($date) && !empty($_POST['hour']) && !empty($_POST['minute']) && !empty($_POST['ampm']) && $time > $datetime)
 			$message = 'Sorry you cannot send an email to the past.';
 		elseif(isset($subject) && !empty($subject) && isset($email_message) && !empty($email_message))
@@ -32,14 +31,12 @@
 			$email = get_email($user);
 			add_email($user, $email, $subject, $email_message, $datetime);
 			$message = 'Email has been sent. Soon in the future, choosing a time to send the email will be implemented.';
+			$error = false;
 		}
 			
 		echo $twig->render('futureEmail.html', array('message' => $message,
 							'username' => $user,
-							'logged_in' => $logged_in));
+							'logged_in' => $logged_in,
+							'error' => $error));
 	}
-		
-
-	
-
 ?>
