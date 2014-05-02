@@ -1,5 +1,9 @@
 <?php
 
+	/*
+	 * Renders the page to signup up for an account and displays errors if failing to signup.
+	 */
+
 	require_once './vendor/autoload.php';
 	require 'session.php';
 	$loader = new Twig_Loader_Filesystem('./templates');

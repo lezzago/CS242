@@ -27,7 +27,7 @@
 	
 		$valid = true;
 		
-		if(isset($new_user) || isset($old_user) || isset($new_pass) || isset($new_pass2))
+		if(!empty($new_user) || !empty($old_user) || !empty($new_pass) || !empty($new_pass2))
 		{
 			if (!empty($new_user) && !check_user($new_user)) 
 				$change_user = true;
@@ -44,7 +44,7 @@
 			if (!empty($new_pass) && strcmp($new_pass, $new_pass2) == 0)
 				$change_pass = true;
 			
-			else
+			elseif((!empty($new_pass) || !empty($new_pass2)) && strcmp($new_pass, $new_pass2) != 0)
 				$invalid_confirm = 'Your passwords didn\'t match.';
 		
 			
@@ -54,6 +54,11 @@
 				{
 					$messages = '';
 					change_user($user, $new_user);
+					$user = $new_user;
+					$_SESSION = array();
+					session_destroy();
+					session_start();
+					$_SESSION['username'] = $user;
 					$messages[] = 'Successfully changed the user to '.$new_user.'.';
 				}
 				
