@@ -16,12 +16,15 @@
 		if(isset($user, $pass))
 		{
 			if(empty($user))
-				$errors[] = 'Please input an username.';
+				$invalid_user = 'Please input an username.';
 			if(empty($pass))
-				$errors[] = 'Please input a password.';
-			if(empty($errors) && !valid_cred($user, $pass))
-				$errors[] = 'The username and password don\'t match.';
-			if(empty($errors))
+				$invalid_pass = 'Please input a password.';
+			if(!$invalid_pass && !$invalid_user && !valid_cred($user, $pass))
+			{
+				$invalid_user = 'The username and password don\'t match.';
+				$invalid_pass = 'The username and password don\'t match.';
+			}
+			if(!$invalid_pass && !$invalid_user)
 			{
 				$_SESSION['username'] = $user;
 				header('Location: welcome.php');
@@ -29,7 +32,9 @@
 		}
 			
 		echo $twig->render('login.html', array('errors' => $errors,
-						'username' => $user));
+											'username' => $user,
+											'invalid_pass' => $invalid_pass,
+											'invalid_user' => $invalid_user));
 	}
 		
 

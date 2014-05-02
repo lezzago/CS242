@@ -19,30 +19,34 @@
 		{
 			$email_check = check_email($email);
 			if(empty($user))
-				$errors[] = 'Please input an username.';
+				$invalid_user = 'Please input an username.';
 			if(empty($pass))
-				$errors[] = 'Please input a password.';
+				$invalid_pass = 'Please input a password.';
 			if($pass !== $pass_conf)
-				$errors[] = 'The two passwords do not match.';
+				$invalid_confirm = 'The two passwords do not match.';
 			if(check_user($user))
-				$errors[] = 'The username has been taken.';
+				$invalid_user = 'The username has been taken.';
 			if(empty($email))
-				$errors[] = 'Please input an email.';
+				$invalid_email = 'Please input an email.';
 			elseif(!preg_match('/^[\S]+@[\S]+\.[\S]+$/', $email))
-				$errors[] = 'That is not a valid email address.';
+				$invalid_email = 'That is not a valid email address.';
 			if(!empty($email_check))
-				$errors[] = 'There is already an account associated to this email.';
-			if(empty($errors))
+				$invalid_email = 'There is already an account associated to this email.';
+			if(!$invalid_email && !$invalid_user && !$invalid_pass && !$invalid_confirm)
 			{
 				add_verify($user, $pass, $email);
-				$errors[] = 'You should recieve an email soon. Sometimes it may take about 30 minutes.';
+				$success = 'You should recieve an email soon. Sometimes it may take about 30 minutes.';
 			}
 		}
 			
-		echo $twig->render('signup.html', array('errors' => $errors,
-							'username' => $user,
-							'email' => $email,
-							'logged_in' => false));
+		echo $twig->render('signup.html', array('invalid_email' => $invalid_email,
+												'invalid_pass' => $invalid_pass,
+												'invalid_user' => $invalid_user,
+												'invalid_confirm' => $invalid_confirm,
+												'success' => $success,
+												'username' => $user,
+												'email' => $email,
+												'logged_in' => false));
 	}
 		
 

@@ -1,24 +1,46 @@
 <html>
 	<head>
 		<title>Login to FutureSend!</title>
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./static/header.css">
 	</head>
 
 	<body>
-		<h1>Login to FutureSend!</h1>
-		<form action="./login.php" method="post">
-			
-			Username:<input type="text" name="username" value="{{username}}">
-			<br>
-			Password:<input type="password" name="pass" value="">
-			<br>
-			<input type="submit" value="Login">
-		</form>
-		{% for error in errors %}
-			<font color="red">
-				{{error}}<br>
-			</font>
-		{% endfor %}
-		Do not have an account? <a href="./signup.php">Signup here.</a>
+		{% import "macros/header.html" as header %}
+		{{ header.nav(logged_in, username) }}
+		<div class="pad">
+			<div class="container" id="box">
+				<h1>Login to FutureSend!</h1>
+				<form action="" class="form-horizontal" method="post">
+					<div class="form-group{% if invalid_user %} has-error{% endif %}">
+							<label class="col-sm-4 control-label">Username</label>
+							<div class="col-sm-4">
+								<input type="text" name="username" class="form-control" value="{{username}}">
+								<span class="help-block">{{invalid_user}}</span>
+							</div>
+						</div>
+						
+						<div class="form-group{% if invalid_pass %} has-error{% endif %}">
+							<label class="col-sm-4 control-label">Password</label>
+							<div class="col-sm-4">
+								<input type="password" class="form-control" name="pass">
+								<span class="help-block">{{invalid_pass}}</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-4 control-label"></div>
+							<div class="col-sm-4" >
+								<button type="submit" class="btn btn-default" style="width:100%">Login</button>
+							</div>
+						</div>
+				</form>
+				Do not have an account? <a href="./signup.php">Signup here.</a>
+			</div>
+		</div>
 	</body>
 
 </html>

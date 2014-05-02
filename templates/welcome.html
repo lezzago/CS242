@@ -13,16 +13,12 @@
 		{{ header.nav(logged_in, username) }}
 		<div class="pad">
 		<div class="container">
-		<h1>Welcome to FutureSend {{username}}!</h1>
-		Your email is {{email}}
-		<br>
-		<a href="./futureEmail.php">Send emails to yourself.</a>
-		<br>
-		<a href="./deleteEmails.php">Delete emails that you sent to yourself.</a>
-		<br>
-		<a href="./edit.php">Edit Profile.</a>
-		<br>
-		<a href="./logout.php">Logout.</a>
+			<div class="jumbotron">
+				<h1>Welcome to FutureSend {{username}}!</h1>
+				<p> This website is a tool to send emails to the your futureself.</p>
+				<br>
+				<a href="./futureEmail.php" class="btn btn-primary btn-lg">Start Sending Emails</a>
+			</div>
 		</div>
 		</div>
 	</body>
